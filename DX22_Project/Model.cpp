@@ -191,7 +191,7 @@ bool Model::Load(const char* file, float scale, Flip flip)
 	int flag = 0;
 	flag |= aiProcess_Triangulate;
 	flag |= aiProcess_FlipUVs;
-	if (flip == Flip::XFlip)  flag |= aiProcess_MakeLeftHanded;
+	//flag |= aiProcess_MakeLeftHanded;
 
 	// assimpで読み込み
 	const aiScene* pScene = importer.ReadFile(file, flag);
@@ -228,44 +228,33 @@ bool Model::Load(const char* file, float scale, Flip flip)
 
 /*
 * @brief 描画
-* @param[in] order 描画順番
+* @param[in] meshNo 描画するメッシュ、-1は全部表示
 * @param[in] func メッシュ描画コールバック
 */
-void Model::Draw(const std::vector<UINT>* order, std::function<void(int)> func)
+void Model::Draw(int meshNo)
 {
 	// シェーダー設定
 	m_pVS->Bind();
 	m_pPS->Bind();
 
+	// テクスチャ自動設定
+	bool isAutoTexture = (meshNo == -1);
+
 	// 描画数設定
 	size_t drawNum = m_meshes.size();
-	if (order)
-	{
-		drawNum = order->size();
-	}
+	if (meshNo != -1)
+		drawNum = meshNo + 1;
+	else
+		meshNo = 0;
+
 
 	// 描画
-	for (UINT i = 0; i < drawNum; ++i)
+	for (UINT i = meshNo; i < drawNum; ++i)
 	{
-		// メッシュ番号設定
-		UINT meshNo = i;
-		if (order)
-		{
-			meshNo = (*order)[i];
+		if (isAutoTexture) {
+			m_pPS->SetTexture(0, m_materials[m_meshes[i].materialID].pTexture);
 		}
-
-		// 描画コールバック
-		if (func)
-		{
-			func(meshNo);
-		}
-		else
-		{
-			m_pPS->SetTexture(0, m_materials[m_meshes[meshNo].materialID].pTexture);
-		}
-
-		// 描画
-		m_meshes[meshNo].pMesh->Draw();
+		m_meshes[i].pMesh->Draw();
 	}
 }
 

@@ -1,6 +1,8 @@
 #ifndef __SCENE_GAME_H__
 #define __SCENE_GAME_H__
 
+#include "Model.h"
+#include "Camera.h"
 
 class SceneGame
 {
@@ -11,6 +13,8 @@ public:
 	void Draw();
 
 private:
+	Model* m_pModel;
+	Camera* m_pCamera;
 };
 
 #endif // __SCENE_GAME_H__

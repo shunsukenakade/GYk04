@@ -239,12 +239,20 @@ float4 main(PS_IN pin) : SV_TARGET
 		color = tex.Sample(samp, pin.uv);
 	float3 N = normalize(pin.normal);
 	float3 L = normalize(-lightDir);
-	float dotNL = saturate(dot(N, L));
+	float dotNL = saturate((dot(N, L) + 0.5f) / 1.5f);
 	float3 diffuse = objDiffuse.rgb * lightDiffuse.rgb;
 	float3 ambient = objAmbient.rgb * lightDiffuse.rgb;
 	float3 specular = objSpecular.rgb * lightDiffuse.rgb;
-	color.rgb *= saturate(diffuse * dotNL + ambient);
-	color.rgb += specular * pow(dotNL, 3.14f) * objSpecular.a;
+	// 本来のLambert拡散反射（思った表現が出来なかったので採用せず
+	// color.rgb *= saturate(diffuse * dotNL + ambient);
+	// 環境光で拡散反射部分の色が変わらないようにlerp(環境光,diffuse,dotNL)で計算
+	// 環境光が弱ければ黒(乗算)、強ければ白(加算)となるように、各計算を線形で補間
+	diffuse *= color.rgb;
+	color.rgb = saturate(lerp(
+		lerp(diffuse * ambient, diffuse + ambient, pow(ambient, 4.0f)),
+		diffuse, dotNL));
+	// 本来なら必要ない鏡面反射、Lambert向けに若干だけ適用
+	color.rgb += specular * pow(saturate(dotNL), max(0.01f, objSpecular.a) * 0.5f) * 0.5f;
 	return color;
 })EOT";
 	m_pPS[PS_LAMBERT] = new PixelShader();
@@ -286,12 +294,15 @@ float4 main(PS_IN pin) : SV_TARGET
 	float3 L = normalize(-lightDir);
 	float3 V = normalize(cameraPos.xyz - pin.wPos.xyz);
 	float3 R = reflect(-V, N);
-	float dotNL = saturate(dot(N, L));
+	float dotNL = saturate((dot(N, L) + 0.5f) / 1.5f);
 	float dotRL = saturate(dot(R, L));
 	float3 diffuse = objDiffuse.rgb * lightDiffuse.rgb;
 	float3 ambient = objAmbient.rgb * lightDiffuse.rgb;
 	float3 specular = objSpecular.rgb * lightDiffuse.rgb;
-	color.rgb *= saturate(diffuse * dotNL + ambient);
+	// Lambertの計算を参考
+	color.rgb *= saturate(lerp(
+		lerp(diffuse * ambient, diffuse + ambient, pow(ambient, 4.0f)),
+		diffuse, dotNL));
 	color.rgb += specular * saturate(pow(dotRL, max(0.01f, objSpecular.a)));
 	return color;
 })EOT";
@@ -327,12 +338,17 @@ float4 main(PS_IN pin) : SV_TARGET
 		color = tex.Sample(samp, pin.uv);
 	float3 N = normalize(pin.normal);
 	float3 L = normalize(-lightDir);
-	float dotNL = dot(N, L);
+	float dotNL = dot(N, L); // マイナス込で計算
 	float3 diffuse = objDiffuse.rgb * lightDiffuse.rgb;
 	float3 ambient = objAmbient.rgb * lightDiffuse.rgb;
 	float3 specular = objSpecular.rgb * lightDiffuse.rgb;
-	color.rgb *= saturate(diffuse * saturate(dotNL * 100.0f) + ambient);
-	color.rgb += specular * step(0.99f, dotNL) * objSpecular.a;
+	float toonNL = saturate((dot(N, L) + 0.5f) / 1.5f * 100.0f); // 陰の境目を柔らかく
+	// Lambertの計算を参考
+	color.rgb *= saturate(lerp(
+		lerp(diffuse * ambient, diffuse + ambient, pow(ambient, 4.0f)),
+		diffuse, toonNL));
+	if(objSpecular.a >= 1.0f)
+		color.rgb += specular * saturate(pow(dotNL, max(0.01f, objSpecular.a)) * 100.0f);
 	return color;
 })EOT";
 	m_pPS[PS_TOON] = new PixelShader();
@@ -379,7 +395,7 @@ float4 main(PS_IN pin) : SV_TARGET
 		color = tex.Sample(samp, pin.uv);
 	float3 N = normalize(pin.normal);
 	float3 L = normalize(-lightDir);
-	float dotNL = saturate(dot(N, L));
+	float dotNL = saturate((dot(N, L) + 0.5f) / 1.5f);
 	float3 diffuse = objDiffuse.rgb * lightDiffuse.rgb;
 	float3 ambient = objAmbient.rgb * lightDiffuse.rgb;
 	color.rgb *= saturate(diffuse * dotNL + ambient);
