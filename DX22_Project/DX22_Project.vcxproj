@@ -143,11 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionBase.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraDebug.cpp" />
     <ClCompile Include="CharacterBase.cpp" />
+    <ClCompile Include="Command.cpp" />
     <ClCompile Include="DirectX.cpp" />
     <ClCompile Include="Geometory.cpp" />
+    <ClCompile Include="Hadouken.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshBuffer.cpp" />
@@ -162,12 +165,15 @@
     <ClCompile Include="_model.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionBase.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraDebug.h" />
     <ClInclude Include="CharacterBase.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="DirectX.h" />
     <ClInclude Include="Geometory.h" />
+    <ClInclude Include="Hadouken.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MeshBuffer.h" />
