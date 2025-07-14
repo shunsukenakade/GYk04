@@ -9,12 +9,9 @@
 #include "ShaderList.h"
 #include <consoleapi.h>
 #include <iostream>
-#include "DebugWindow.h"
 
 //--- グローバル変数
 SceneGame* g_pGame;
-DebugWindow* g_pDebugWindow;
-
 
 HRESULT Init(HWND hWnd, UINT width, UINT height)
 {
@@ -23,28 +20,24 @@ HRESULT Init(HWND hWnd, UINT width, UINT height)
 	hr = InitDirectX(hWnd, width, height, false);
 	if (FAILED(hr)) { return hr; }
 
-	g_pDebugWindow = DebugWindow::GetInstance();
-	g_pDebugWindow->Init(hWnd, GetDevice(), GetContext());
 
-
-	//AllocConsole();
-	//// コンソールのエンコーディングを UTF-8 に設定
-	//SetConsoleOutputCP(CP_UTF8);
+	AllocConsole();
+	// コンソールのエンコーディングを UTF-8 に設定
+	SetConsoleOutputCP(CP_UTF8);
 
 	// 標準出力をリダイレクト
-	//FILE* fp;
-	//freopen_s(&fp, "CONOUT$", "w", stdout); // 標準出力をコンソールにリダイレクト
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout); // 標準出力をコンソールにリダイレクト
 	//freopen_s(&fp, "CONOUT$", "w", stderr); // 標準エラー出力をコンソールにリダイレクト
 	//freopen_s(&fp, "CONIN$", "r", stdin);   // 標準入力をコンソールにリダイレクト
 
 	// コンソールのバッファサイズを設定（必要に応じて調整）
-	//std::cout.clear();      // 標準出力 ストリームのエラー状態をクリア
-	//std::wcout.clear();     // ワイド文字   ,,
+	std::cout.clear();      // 標準出力 ストリームのエラー状態をクリア
+	std::wcout.clear();     // ワイド文字   ,,
 	// std::cerr.clear();
 	// std::wcerr.clear();
 	// std::cin.clear();
 	// std::wcin.clear();
-
 	
 	// 他機能初期化
 	Geometory::Init();
@@ -60,32 +53,25 @@ HRESULT Init(HWND hWnd, UINT width, UINT height)
 
 void Uninit()
 {
-
 	delete g_pGame;
 	ShaderList::Uninit();
 	UninitInput();
 	Sprite::Uninit();
 	Geometory::Uninit();
 
-	// FreeConsole();
-
-	g_pDebugWindow->Uninit();
+	FreeConsole();
 
 	UninitDirectX();
 }
 
 void Update()
 {
-
-
 	UpdateInput();
 	g_pGame->Update();
-
 }
 
 void Draw()
 {
-
 	BeginDrawDirectX();
 
 	// 軸線の表示
@@ -150,11 +136,7 @@ void Draw()
 #endif
 
 	g_pGame->Draw();
-
-	g_pDebugWindow->Draw();
-
 	EndDrawDirectX();
-
 }
 
 // EOF

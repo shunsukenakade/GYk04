@@ -3,7 +3,6 @@
 #include "Main.h"
 #include <stdio.h>
 #include <crtdbg.h>
-#include "IMGUI/imgui_impl_dx11.h"
 
 // timeGetTime周りの使用
 #pragma comment(lib, "winmm.lib")
@@ -109,16 +108,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	return 0;
 }
 
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
 // ウィンドウプロシージャ
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
-	{
-		return true;
-	}
-
 	switch (message)
 	{
 	case WM_DESTROY:

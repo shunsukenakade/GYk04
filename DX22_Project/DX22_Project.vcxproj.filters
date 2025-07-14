@@ -34,11 +34,8 @@
     <Filter Include="ソース ファイル\Scenes">
       <UniqueIdentifier>{9e919a54-8f7f-4946-b762-8a9111f98073}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\imgui">
-      <UniqueIdentifier>{03795825-88f1-45e1-92e8-697017245092}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\GameObjects">
-      <UniqueIdentifier>{b694b955-a0e6-4da0-a27c-0e2e365417d7}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Character">
+      <UniqueIdentifier>{650aae7d-12c8-4f16-9269-e2cb4993daf6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -90,37 +87,16 @@
     <ClCompile Include="SceneGame.cpp">
       <Filter>ソース ファイル\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="IMGUI\imgui.cpp">
-      <Filter>ソース ファイル\imgui</Filter>
+    <ClCompile Include="CharacterBase.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="IMGUI\imgui_demo.cpp">
-      <Filter>ソース ファイル\imgui</Filter>
+    <ClCompile Include="Command.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="IMGUI\imgui_draw.cpp">
-      <Filter>ソース ファイル\imgui</Filter>
+    <ClCompile Include="ActionBase.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="IMGUI\imgui_impl_dx11.cpp">
-      <Filter>ソース ファイル\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\imgui_impl_win32.cpp">
-      <Filter>ソース ファイル\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\imgui_tables.cpp">
-      <Filter>ソース ファイル\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\imgui_widgets.cpp">
-      <Filter>ソース ファイル\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugWindow.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>ソース ファイル\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Spring.cpp">
-      <Filter>ソース ファイル\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraInGame.cpp">
+    <ClCompile Include="Hadouken.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -167,40 +143,16 @@
     <ClInclude Include="SceneGame.h">
       <Filter>ソース ファイル\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\imconfig.h">
-      <Filter>ソース ファイル\imgui</Filter>
+    <ClInclude Include="CharacterBase.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\imgui.h">
-      <Filter>ソース ファイル\imgui</Filter>
+    <ClInclude Include="Command.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\imgui_impl_dx11.h">
-      <Filter>ソース ファイル\imgui</Filter>
+    <ClInclude Include="ActionBase.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\imgui_impl_win32.h">
-      <Filter>ソース ファイル\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="IMGUI\imgui_internal.h">
-      <Filter>ソース ファイル\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="IMGUI\imstb_rectpack.h">
-      <Filter>ソース ファイル\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="IMGUI\imstb_textedit.h">
-      <Filter>ソース ファイル\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="IMGUI\imstb_truetype.h">
-      <Filter>ソース ファイル\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>ソース ファイル\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugWindow.h">
-      <Filter>ソース ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Spring.h">
-      <Filter>ソース ファイル\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraInGame.h">
+    <ClInclude Include="Hadouken.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
