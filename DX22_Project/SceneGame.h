@@ -4,9 +4,6 @@
 #include "Model.h"
 #include "Camera.h"
 
-#include "Command.h"
-#include "ActionBase.h"
-
 class SceneGame
 {
 public:
@@ -16,10 +13,7 @@ public:
 	void Draw();
 
 private:
-	Model* m_pModel;
-	Camera* m_pCamera;
-	Command* m_pCommand;
-	std::vector<ActionBase> m_actionList;
+	Camera* _camera;
 };
 
 #endif // __SCENE_GAME_H__

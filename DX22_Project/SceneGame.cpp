@@ -2,49 +2,43 @@
 #include "Geometory.h"
 #include "Defines.h"
 #include "CameraDebug.h"
+#include "CameraInGame.h"
 #include "ShaderList.h"
+#include "Spring.h"
 
-#include "Hadouken.h"
+Spring* g_spring;
 
 SceneGame::SceneGame()
 {
-	m_pCamera = new CameraDebug();
+	_camera = new CameraInGame();
 
-	m_pModel = new Model();
-	if (!m_pModel->Load("Models/FBX_Demo_standing.fbx")) {
-		MessageBox(NULL, "Models/FBX_Demo_standing.fbx", "Error", MB_OK);
-	}
-
-	m_pCommand = new Command();
-	Hadouken* hadou = new Hadouken();
-	m_pCommand->SetAction(hadou);
+	g_spring = new Spring();
+	g_spring->SetCamera(_camera);
 }
 
 SceneGame::~SceneGame()
 {
-	if (m_pCommand) {
-		delete m_pCommand;
-		m_pCommand = nullptr;
-	}
 
-	if (m_pModel) {
-		delete m_pModel;
-		m_pModel = nullptr;
-	}
-
-	if (m_pCamera) {
-		delete m_pCamera;
-		m_pCamera = nullptr;
+	if (_camera) {
+		delete _camera;
+		_camera = nullptr;
 	}
 }
 
 void SceneGame::Update()
 {
-	m_pCamera->Update();
-	m_pCommand->Update();
+	_camera->Update();
+	g_spring->Update();
 }
 
 void SceneGame::Draw()
 {
-	m_pCommand->Draw();
+	RenderTarget* pRTV = GetDefaultRTV(); // RenderTargetView 
+	DepthStencil* pDSV = GetDefaultDSV(); // DepthStencilView 
+	SetRenderTargets(1, &pRTV, pDSV);
+
+	Geometory::SetView(_camera->GetViewMatrix());
+	Geometory::SetProjection(_camera->GetProjectionMatrix());
+
+	g_spring->Draw();
 }
