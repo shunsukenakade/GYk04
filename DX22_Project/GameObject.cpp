@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "ShaderList.h"
 #include "Geometory.h"
+#include "Defines.h"
 
 void GameObject::Init()
 {
@@ -16,6 +17,10 @@ void GameObject::Update()
 
 void GameObject::Draw()
 {
+	if (!_model || !_camera)
+	{
+		return;
+	}
 
 	DirectX::XMMATRIX world, S, R, T;
 	DirectX::XMFLOAT4X4 wvp[3];
@@ -26,6 +31,7 @@ void GameObject::Draw()
 	world = S * R * T;
 
 	DirectX::XMStoreFloat4x4(&wvp[0], XMMatrixTranspose(world));
+
 	wvp[1] = _camera->GetViewMatrix();
 	wvp[2] = _camera->GetProjectionMatrix();
 

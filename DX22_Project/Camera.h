@@ -18,6 +18,9 @@ public:
 	// 注視点の取得
 	DirectX::XMFLOAT3 GetLook() { return m_look; }
 
+	float GetFovy() { return m_fovy; }		// 画角の取得
+	float GetAspect() { return m_aspect; }	// アスペクト比の取得
+
 	void SetLook(DirectX::XMFLOAT3 look) { m_look = look; }
 
 protected:
