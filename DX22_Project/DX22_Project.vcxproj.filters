@@ -120,7 +120,13 @@
     <ClCompile Include="Spring.cpp">
       <Filter>ソース ファイル\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>ソース ファイル\GameObjects</Filter>
+    </ClCompile>
     <ClCompile Include="CameraInGame.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Goal.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -200,7 +206,13 @@
     <ClInclude Include="Spring.h">
       <Filter>ソース ファイル\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>ソース ファイル\GameObjects</Filter>
+    </ClInclude>
     <ClInclude Include="CameraInGame.h">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Goal.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

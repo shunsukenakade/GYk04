@@ -1,5 +1,6 @@
 #pragma once
 #include "Camera.h"
+#include "Ball.h"
 class CameraInGame : public Camera
 {
 public:
@@ -7,5 +8,9 @@ public:
 	~CameraInGame();
 
 	void Update() override;
+	void SetBall(Ball* ball) { _ball = ball; }
+
+private:
+	Ball* _ball = nullptr;
 };
 

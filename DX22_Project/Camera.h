@@ -14,21 +14,21 @@ public:
 	// プロジェクション行列の取得(デフォルトでは転置済みの行列を計算する)
 	DirectX::XMFLOAT4X4 GetProjectionMatrix(bool transpose = true);
 	// 座標の取得
-	DirectX::XMFLOAT3 GetPos() { return m_pos; }
+	DirectX::XMFLOAT3 GetPos() { return _pos; }
 	// 注視点の取得
-	DirectX::XMFLOAT3 GetLook() { return m_look; }
+	DirectX::XMFLOAT3 GetLook() { return _look; }
 
-	float GetFovy() { return m_fovy; }		// 画角の取得
-	float GetAspect() { return m_aspect; }	// アスペクト比の取得
+	float GetFovy() { return _fovy; }		// 画角の取得
+	float GetAspect() { return _aspect; }	// アスペクト比の取得
 
-	void SetLook(DirectX::XMFLOAT3 look) { m_look = look; }
+	void SetLook(DirectX::XMFLOAT3 look) { _look = look; }
 
 protected:
-	DirectX::XMFLOAT3 m_pos;	// 座標
-	DirectX::XMFLOAT3 m_look;	// 注視点
-	DirectX::XMFLOAT3 m_up;		// 上方ベクトル
-	float	m_fovy;				// 画角
-	float	m_aspect;			// アスペクト比
-	float	m_near;				// ニアクリップ
-	float	m_far;				// ファークリップ
+	DirectX::XMFLOAT3 _pos;	// 座標
+	DirectX::XMFLOAT3 _look;	// 注視点
+	DirectX::XMFLOAT3 _up;		// 上方ベクトル
+	float	_fovy;				// 画角
+	float	_aspect;			// アスペクト比
+	float	_near;				// ニアクリップ
+	float	_far;				// ファークリップ
 };

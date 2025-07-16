@@ -18,8 +18,10 @@ static const float fFPS = static_cast<float>(FPS);
 #define CMSEC(value) MSEC(CMETER(value))
 static const float GRAVITY = 0.98f;
 
+#define ATT_COEFFICIENT			0.9f	// 減衰係数(Attenuation)
+
 // タイトル
-static const char* APP_TITLE = "FightingGame";
+static const char* APP_TITLE = "GY31";
 
 // 画面サイズ
 static const int SCREEN_WIDTH	= 1280;

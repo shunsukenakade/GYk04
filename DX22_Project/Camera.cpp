@@ -2,9 +2,9 @@
 #include <Defines.h>
 
 Camera::Camera()
-	: m_pos{ 0.0f, 0.0f, -10.0f }, m_look(0.0f, 0.0f, 0.0f), m_up(0.0f, 1.0f, 0.0f)
-	, m_fovy(DirectX::XMConvertToRadians(60.0f)), m_aspect(16.0f / 9.0f)
-	, m_near(CMETER(30.0f)), m_far(METER(1000.0f))
+	: _pos{ 0.0f, 0.0f, -10.0f }, _look(0.0f, 0.0f, 0.0f), _up(0.0f, 1.0f, 0.0f)
+	, _fovy(DirectX::XMConvertToRadians(60.0f)), _aspect(16.0f / 9.0f)
+	, _near(CMETER(30.0f)), _far(METER(1000.0f))
 {
 }
 
@@ -18,9 +18,9 @@ DirectX::XMFLOAT4X4 Camera::GetViewMatrix(bool transpose)
 	DirectX::XMMATRIX view;
 	// ビュー変換行列
 	view = DirectX::XMMatrixLookAtLH(
-		DirectX::XMVectorSet(m_pos.x, m_pos.y, m_pos.z, 0.0f),
-		DirectX::XMVectorSet(m_look.x, m_look.y, m_look.z, 0.0f),
-		DirectX::XMVectorSet(m_up.x, m_up.y, m_up.z, 0.0f)
+		DirectX::XMVectorSet(_pos.x, _pos.y, _pos.z, 0.0f),
+		DirectX::XMVectorSet(_look.x, _look.y, _look.z, 0.0f),
+		DirectX::XMVectorSet(_up.x, _up.y, _up.z, 0.0f)
 	);
 	// 転置
 	if (transpose)
@@ -36,7 +36,7 @@ DirectX::XMFLOAT4X4 Camera::GetProjectionMatrix(bool transpose)
 	DirectX::XMFLOAT4X4 mat;
 	DirectX::XMMATRIX proj;
 	// プロジェクション変換行列
-	proj = DirectX::XMMatrixPerspectiveFovLH(m_fovy, m_aspect, m_near, m_far);
+	proj = DirectX::XMMatrixPerspectiveFovLH(_fovy, _aspect, _near, _far);
 	// 転置
 	if (transpose)
 	{
